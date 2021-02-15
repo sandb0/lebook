@@ -1,4 +1,10 @@
-# LeBook
+<h1 align="center">
+  <img width="350px" src="docs/.assets/images/logo.png" alt="LeBook's Logo" />
+</h1>
+
+<div align="center">
+
+</div>
 
 > An application to reserve products in a certain period.
 > For example, book rooms in a hotel or book clothes in a store.
