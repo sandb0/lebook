@@ -17,6 +17,8 @@
 
 ## Monorepo Structure
 
+> How this application is organized in this monorepo.
+
 - `docs/`: All documentation for this application.
 - `backend/`: All source code for the services of this application.
 
