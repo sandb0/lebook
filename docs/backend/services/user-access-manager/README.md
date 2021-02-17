@@ -62,7 +62,7 @@ curl -X POST .../v1/users \
 
 > Returns the User Object if a new user was created.
 >
-> Returns an Error if for any reason the new user could not be created. For example, service unavailable or one of the parameters is invalid.
+> Returns an [Error](https://github.com/sandb0/lebook/tree/main/docs/backend/API_REFERENCE.md#errors) if for any reason the new user could not be created. For example, service unavailable or one of the parameters is invalid.
 
 ```json
 {
