@@ -34,7 +34,7 @@
 
 ## Register a new User
 
-> Register a new User with Email and Password like identification data.
+> The feature register a new User with Email and Password like identification data.
 
 > `POST /v1/users`
 
