@@ -6,6 +6,8 @@
 
 - [Services Structure](#services-structure).
 - [API Reference](#api-reference).
+- [Services Documentation](#services-documentation).
+  - Service: [User Access Manager Service](https://github.com/sandb0/lebook/tree/main/docs/backend/services/user-access-manager).
 
 ## Services Structure
 
