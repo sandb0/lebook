@@ -3,5 +3,9 @@
   "private": true,
   "devDependencies": {
     "git-commit-msg-linter": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sandb0/lebook.git"
   }
 }
