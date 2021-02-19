@@ -4,5 +4,8 @@
   "description": "The service responsible for Authentication, Authorization, User Management and their information and Activity Log for each user",
   "author": "Pedro Henrique <sandbox0@hotmail.com>",
   "main": "src/index.ts",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "typescript": "^4.1.5"
+  }
 }
