@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn packages:user-access-manager-service:lint-tsc
+yarn lint-staged
