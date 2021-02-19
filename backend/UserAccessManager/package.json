@@ -5,6 +5,7 @@
   "author": "Pedro Henrique <sandbox0@hotmail.com>",
   "main": "src/index.ts",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "build:clean": "tsc --build --clean && rimraf build"
