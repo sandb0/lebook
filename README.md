@@ -20,7 +20,7 @@
 > How this application is organized in this monorepo.
 
 - `docs/`: All documentation for this application.
-- `backend/`: All source code for the services of this application.
+- `packages/`: All source code of this application.
 
 ## Project Use Cases
 
