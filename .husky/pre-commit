@@ -2,4 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn backend:user-access-manager:lint-tsc
+yarn test --bail
 yarn lint-staged
