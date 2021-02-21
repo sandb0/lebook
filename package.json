@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "lint:prettier": "prettier --write .",
-    "packages:user-access-manager-service:lint-tsc": "cd packages/UserAccessManagerService && yarn lint:tsc",
+    "packages:user-access-manager-service:lint-tsc": "cd packages/backend/UserAccessManagerService && yarn lint:tsc",
     "lint:eslint": "eslint packages/**/*.{js,ts} --fix --max-warnings 0"
   },
   "devDependencies": {
