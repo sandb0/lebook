@@ -21,6 +21,7 @@
 
 - `docs/`: All documentation for this application.
 - `packages/`: All source code of this application.
+  - `backend/`: All source code of microservices of this application.
 
 ## Project Use Cases
 
