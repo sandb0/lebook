@@ -5,9 +5,12 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "lint:prettier": "prettier --write .",
-    "packages:user-access-manager-service:lint-tsc": "cd packages/backend/UserAccessManagerService && yarn lint:tsc",
+    "backend:user-access-manager:lint-tsc": "cd packages/backend/UserAccessManager && yarn lint:tsc",
     "lint:eslint": "eslint packages/**/*.{js,ts} --fix --max-warnings 0"
   },
+  "workspaces": [
+    "packages/backend/*"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
@@ -24,6 +27,10 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "typescript": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=14.15.5",
+    "yarn": ">=1.22.5"
   },
   "repository": {
     "type": "git",

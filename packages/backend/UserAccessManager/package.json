@@ -1,5 +1,5 @@
 {
-  "name": "user-access-manager-service",
+  "name": "user-access-manager",
   "version": "0.0.1",
   "description": "The service responsible for Authentication, Authorization, User Management and their information and Activity Log for each user",
   "author": "Pedro Henrique <sandbox0@hotmail.com>",
