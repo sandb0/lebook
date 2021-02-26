@@ -35,6 +35,9 @@
       - `domain/`.
       - `application/`.
       - `infrastructure/`.
+        - `controllers/`.
+          - `[ControllerName]/`.
+            - `__tests__/`.
 
 ## API Reference
 
