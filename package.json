@@ -7,6 +7,8 @@
     "lint:prettier": "prettier --write .",
     "lint:eslint": "eslint packages/**/*.{js,ts} --fix --max-warnings 0",
     "test": "lerna run test",
+    "build": "lerna run build",
+    "build:clean": "lerna run build:clean",
     "backend:user-access-manager:lint-tsc": "cd packages/backend/UserAccessManager && yarn lint:tsc"
   },
   "workspaces": [
