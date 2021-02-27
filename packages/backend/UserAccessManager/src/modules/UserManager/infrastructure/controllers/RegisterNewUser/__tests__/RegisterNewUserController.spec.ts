@@ -4,7 +4,7 @@ import faker from 'faker';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {
-    it('should return HTTP Status Code 400 (Bad Request) if `fullName`, `email` or `password` is not provided', () => {
+    it('should return HTTP Status Code 400 (Bad Request) if `fullName`, `email` and `password` is not provided', () => {
       const SUT = new RegisterNewUserController();
 
       const requestObject = {
@@ -15,15 +15,14 @@ describe('Module - UserManager', () => {
 
       const { statusCode, error } = SUT.execute(requestObject);
 
-      const errorMessage = Array<string>(
+      const errorMessages = Array<string>(
         '[fullName] cannot be empty',
         '[email] cannot be empty',
         '[password] cannot be empty'
       );
 
       expect(statusCode).toBe(400);
-      expect(error?.type).toBe('InvalidRequestError');
-      expect(error?.message).toEqual(errorMessage);
+      expect(error?.messages).toEqual(errorMessages);
     });
 
     it('should return HTTP Status Code 400 (Bad Request) if `fullName` is not provided', () => {
@@ -38,8 +37,7 @@ describe('Module - UserManager', () => {
       const { statusCode, error } = SUT.execute(requestObject);
 
       expect(statusCode).toBe(400);
-      expect(error?.type).toBe('InvalidRequestError');
-      expect(error?.message[0]).toBe('[fullName] cannot be empty');
+      expect(error?.messages[0]).toBe('[fullName] cannot be empty');
     });
 
     it('should return HTTP Status Code 400 (Bad Request) if `email` is not provided', () => {
@@ -54,8 +52,7 @@ describe('Module - UserManager', () => {
       const { statusCode, error } = SUT.execute(requestObject);
 
       expect(statusCode).toBe(400);
-      expect(error?.type).toBe('InvalidRequestError');
-      expect(error?.message[0]).toBe('[email] cannot be empty');
+      expect(error?.messages[0]).toBe('[email] cannot be empty');
     });
 
     it('should return HTTP Status Code 400 (Bad Request) if `password` is not provided', () => {
@@ -70,8 +67,7 @@ describe('Module - UserManager', () => {
       const { statusCode, error } = SUT.execute(requestObject);
 
       expect(statusCode).toBe(400);
-      expect(error?.type).toBe('InvalidRequestError');
-      expect(error?.message[0]).toBe('[password] cannot be empty');
+      expect(error?.messages[0]).toBe('[password] cannot be empty');
     });
   });
 });
