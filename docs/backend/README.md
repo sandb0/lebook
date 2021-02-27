@@ -29,6 +29,7 @@
     - `domain/`.
     - `application/`.
     - `infrastructure/`.
+      - `controllers/`.
 
   - `modules/`.
     - `[ModuleName]/`.
