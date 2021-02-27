@@ -2,7 +2,7 @@ type AbstractResponse = {
   statusCode: number;
   error?: {
     type: string;
-    message: string;
+    message: Array<string>;
   };
 };
 
@@ -17,32 +17,26 @@ export default class RegisterNewUserController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     requestObject: RegisterNewUserRequestObject
   ): AbstractResponse {
+    const errorMessage = Array<string>();
+
     if (!requestObject.fullName) {
-      return {
-        statusCode: 400,
-        error: {
-          type: 'InvalidRequestError',
-          message: '[fullName] cannot be empty',
-        },
-      };
+      errorMessage.push('[fullName] cannot be empty');
     }
 
     if (!requestObject.email) {
-      return {
-        statusCode: 400,
-        error: {
-          type: 'InvalidRequestError',
-          message: '[email] cannot be empty',
-        },
-      };
+      errorMessage.push('[email] cannot be empty');
     }
 
     if (!requestObject.password) {
+      errorMessage.push('[password] cannot be empty');
+    }
+
+    if (errorMessage) {
       return {
         statusCode: 400,
         error: {
           type: 'InvalidRequestError',
-          message: '[password] cannot be empty',
+          message: errorMessage,
         },
       };
     }
