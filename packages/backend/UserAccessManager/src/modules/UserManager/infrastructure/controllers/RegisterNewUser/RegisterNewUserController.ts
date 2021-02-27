@@ -1,10 +1,5 @@
-type AbstractResponse = {
-  statusCode: number;
-  error?: {
-    type: string;
-    message: Array<string>;
-  };
-};
+import AbstractController from '../../../../../abstractions/infrastructure/controllers/AbstractController';
+import AbstractResponse from '../../../../../abstractions/infrastructure/controllers/AbstractResponse';
 
 type RegisterNewUserRequestObject = {
   fullName?: string;
@@ -12,37 +7,26 @@ type RegisterNewUserRequestObject = {
   password?: string;
 };
 
-export default class RegisterNewUserController {
+export default class RegisterNewUserController extends AbstractController<RegisterNewUserRequestObject> {
   public execute(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     requestObject: RegisterNewUserRequestObject
   ): AbstractResponse {
-    const errorMessage = Array<string>();
-
     if (!requestObject.fullName) {
-      errorMessage.push('[fullName] cannot be empty');
+      this.errorMessages.push('[fullName] cannot be empty');
     }
 
     if (!requestObject.email) {
-      errorMessage.push('[email] cannot be empty');
+      this.errorMessages.push('[email] cannot be empty');
     }
 
     if (!requestObject.password) {
-      errorMessage.push('[password] cannot be empty');
+      this.errorMessages.push('[password] cannot be empty');
     }
 
-    if (errorMessage) {
-      return {
-        statusCode: 400,
-        error: {
-          type: 'InvalidRequestError',
-          message: errorMessage,
-        },
-      };
+    if (this.errorMessages) {
+      return this.badRequest();
     }
 
-    return {
-      statusCode: 200,
-    };
+    return this.ok();
   }
 }
