@@ -1,5 +1,8 @@
 import AbstractController from '../../../../../abstractions/infrastructure/controllers/AbstractController';
 import AbstractResponse from '../../../../../abstractions/infrastructure/controllers/AbstractResponse';
+import RegisterNewUser, {
+  RegisterNewUserProps,
+} from '../../../application/RegisterNewUser/RegisterNewUser';
 
 type RegisterNewUserRequestObject = {
   fullName?: string;
@@ -8,24 +11,24 @@ type RegisterNewUserRequestObject = {
 };
 
 export default class RegisterNewUserController extends AbstractController<RegisterNewUserRequestObject> {
+  private useCase: RegisterNewUser;
+
+  public constructor(useCase: RegisterNewUser) {
+    super();
+
+    this.useCase = useCase;
+  }
+
   public execute(
     requestObject: RegisterNewUserRequestObject
   ): AbstractResponse {
-    if (!requestObject.fullName) {
-      this.errorMessages.push('[fullName] cannot be empty');
-    }
+    const props: RegisterNewUserProps = {
+      fullName: requestObject.fullName || '',
+      email: requestObject.email || '',
+      password: requestObject.password || '',
+    };
 
-    if (!requestObject.email) {
-      this.errorMessages.push('[email] cannot be empty');
-    }
-
-    if (!requestObject.password) {
-      this.errorMessages.push('[password] cannot be empty');
-    }
-
-    if (this.errorMessages) {
-      return this.badRequest();
-    }
+    this.useCase.execute(props);
 
     return this.ok();
   }
