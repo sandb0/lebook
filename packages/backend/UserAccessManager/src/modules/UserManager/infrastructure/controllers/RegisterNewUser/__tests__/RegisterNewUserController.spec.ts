@@ -1,73 +1,35 @@
+import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUser';
 import RegisterNewUserController from '../RegisterNewUserController';
 
-import faker from 'faker';
-
+/**
+ * Qual a função do Controller:
+ * - Receber qualquer tipo de dado.
+ * - Chamar o UseCase.
+ * - Retornar uma resposta de acordo com a resposta do UseCase.
+ *
+ * Como testar o Controller?
+ * - Fazer o Mock do UseCase e testar a resposto do Controller para cada retorno do UseCase.
+ * Isso é suficiente para garantir o funcionamento do Controller.
+ */
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {
-    it('should return HTTP Status Code 400 (Bad Request) if `fullName`, `email` and `password` is not provided', () => {
-      const SUT = new RegisterNewUserController();
+    it('should call RegisterNewUser Use Case with expected `requestObject`', () => {
+      const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
+      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
+      registerNewUserMock.execute = jest.fn();
+
+      const SUT = new RegisterNewUserController(registerNewUserMock);
 
       const requestObject = {
-        fullName: undefined,
-        email: undefined,
-        password: undefined,
+        fullName: undefined || '',
+        email: undefined || '',
+        password: undefined || '',
       };
 
-      const { statusCode, error } = SUT.execute(requestObject);
+      SUT.execute(requestObject);
 
-      const errorMessages = Array<string>(
-        '[fullName] cannot be empty',
-        '[email] cannot be empty',
-        '[password] cannot be empty'
-      );
-
-      expect(statusCode).toBe(400);
-      expect(error?.messages).toEqual(errorMessages);
-    });
-
-    it('should return HTTP Status Code 400 (Bad Request) if `fullName` is not provided', () => {
-      const SUT = new RegisterNewUserController();
-
-      const requestObject = {
-        fullName: undefined,
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-      };
-
-      const { statusCode, error } = SUT.execute(requestObject);
-
-      expect(statusCode).toBe(400);
-      expect(error?.messages[0]).toBe('[fullName] cannot be empty');
-    });
-
-    it('should return HTTP Status Code 400 (Bad Request) if `email` is not provided', () => {
-      const SUT = new RegisterNewUserController();
-
-      const requestObject = {
-        fullName: `${faker.name.firstName} ${faker.name.lastName}`,
-        email: undefined,
-        password: faker.internet.password(),
-      };
-
-      const { statusCode, error } = SUT.execute(requestObject);
-
-      expect(statusCode).toBe(400);
-      expect(error?.messages[0]).toBe('[email] cannot be empty');
-    });
-
-    it('should return HTTP Status Code 400 (Bad Request) if `password` is not provided', () => {
-      const SUT = new RegisterNewUserController();
-
-      const requestObject = {
-        fullName: `${faker.name.firstName()} ${faker.name.lastName()}`,
-        email: faker.internet.email(),
-        password: undefined,
-      };
-
-      const { statusCode, error } = SUT.execute(requestObject);
-
-      expect(statusCode).toBe(400);
-      expect(error?.messages[0]).toBe('[password] cannot be empty');
+      expect(registerNewUserMock.execute).toBeCalledTimes(1);
+      expect(registerNewUserMock.execute).toBeCalledWith(requestObject);
     });
   });
 });
