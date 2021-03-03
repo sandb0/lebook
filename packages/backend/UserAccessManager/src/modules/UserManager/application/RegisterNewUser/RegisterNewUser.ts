@@ -1,4 +1,4 @@
-import EmailFactory from '../../domain/valueObjects/Email/Email';
+import EmailFactory from '../../domain/valueObjects/Email/EmailFactory';
 
 export type RegisterNewUserProps = {
   fullName: string;
@@ -14,7 +14,7 @@ export default class RegisterNewUser {
   }
 
   public execute(props: RegisterNewUserProps): string {
-    const emailObject = this.emailFactory.build({ email: props.email });
+    const emailObject = this.emailFactory.create({ email: props.email });
 
     if (emailObject.error) {
       return emailObject.error;
