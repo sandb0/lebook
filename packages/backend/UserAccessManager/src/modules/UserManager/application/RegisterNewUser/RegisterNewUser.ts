@@ -1,4 +1,4 @@
-import EmailFactory from '../../domain/valueObjects/Email/EmailFactory';
+import { EmailFactory } from '../../domain/valueObjects/Email';
 
 export type RegisterNewUserProps = {
   fullName: string;

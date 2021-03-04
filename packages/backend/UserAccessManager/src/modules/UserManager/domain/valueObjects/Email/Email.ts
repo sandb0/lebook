@@ -1,8 +1,5 @@
 import ValueObject from '../../../../../abstractions/domain/valueObjects/ValueObject';
-
-export interface IEmailValidator {
-  isEmail(email: string): boolean;
-}
+import IEmailValidator from '../../../../../frameworks/validators/IEmailValidator';
 
 export type EmailProps = {
   email: string;

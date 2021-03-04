@@ -1,5 +1,5 @@
-import { IEmailValidator } from '../Email';
 import EmailFactory from '../EmailFactory';
+import IEmailValidator from '../../../../../../frameworks/validators/IEmailValidator';
 
 describe('Module: UserManager', () => {
   describe('Email Value Object', () => {

@@ -1,5 +1,6 @@
 import ValueObjectFactory from '../../../../../abstractions/domain/valueObjects/ValueObjectFactory';
-import Email, { EmailValidators, IEmailValidator, EmailProps } from './Email';
+import Email, { EmailValidators, EmailProps } from './Email';
+import IEmailValidator from '../../../../../frameworks/validators/IEmailValidator';
 
 export default class EmailFactory extends ValueObjectFactory<
   Email,
