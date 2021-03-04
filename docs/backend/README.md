@@ -21,6 +21,7 @@
 
   - `frameworks/`.
 
+    - `validators/`.
     - `http/`.
     - `database/`.
 
