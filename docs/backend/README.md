@@ -19,7 +19,7 @@
 
   - `configs/`.
 
-  - `frameworks/`.
+  - `libs/`.
 
     - `validators/`.
     - `http/`.

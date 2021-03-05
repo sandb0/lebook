@@ -23,6 +23,10 @@ class ControllerMock extends AbstractController<RequestObject> {
   public badRequestSpy() {
     return this.badRequest();
   }
+
+  public serverErrorSpy() {
+    return this.serverError();
+  }
 }
 
 describe('Abstractions', () => {
@@ -50,6 +54,21 @@ describe('Abstractions', () => {
       };
 
       expect(SUT.badRequestSpy()).toEqual(responseObject);
+    });
+
+    it('should return the expected `responseObject` when `serverError()` method is called', () => {
+      const SUT = new ControllerMock();
+      SUT.addErrorMessageSpy('Any Error 1');
+      SUT.addErrorMessageSpy('Any Error 2');
+
+      const responseObject = {
+        statusCode: HTTPStatusCode.ServerError,
+        error: {
+          messages: ['Any Error 1', 'Any Error 2'],
+        },
+      };
+
+      expect(SUT.serverErrorSpy()).toEqual(responseObject);
     });
   });
 });
