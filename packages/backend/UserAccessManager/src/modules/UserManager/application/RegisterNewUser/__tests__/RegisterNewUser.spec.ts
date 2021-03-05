@@ -1,5 +1,5 @@
-import { EmailFactory } from '../../../domain/valueObjects/Email';
 import RegisterNewUser, { RegisterNewUserProps } from '../RegisterNewUser';
+import { EmailFactory } from '../../../domain/valueObjects/Email';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUser', () => {

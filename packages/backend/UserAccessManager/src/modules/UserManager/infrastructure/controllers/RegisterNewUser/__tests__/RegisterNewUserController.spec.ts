@@ -1,5 +1,5 @@
-import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUser';
 import RegisterNewUserController from '../RegisterNewUserController';
+import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUser';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {
