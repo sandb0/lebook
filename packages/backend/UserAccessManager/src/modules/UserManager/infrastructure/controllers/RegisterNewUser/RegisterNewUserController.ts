@@ -24,13 +24,17 @@ export default class RegisterNewUserController extends AbstractController<Regist
   public execute(
     requestObject: RegisterNewUserRequestObject
   ): AbstractResponse {
-    const props: RegisterNewUserProps = {
-      fullName: requestObject.fullName || '',
-      email: requestObject.email || '',
-      password: requestObject.password || '',
-    };
+    try {
+      const props: RegisterNewUserProps = {
+        fullName: requestObject.fullName || '',
+        email: requestObject.email || '',
+        password: requestObject.password || '',
+      };
 
-    this.useCase.execute(props);
+      this.useCase.execute(props);
+    } catch (error) {
+      return this.serverError();
+    }
 
     return this.ok();
   }
