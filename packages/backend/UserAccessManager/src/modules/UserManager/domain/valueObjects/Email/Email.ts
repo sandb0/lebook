@@ -1,5 +1,5 @@
-import ValueObject from '../../../../../abstractions/domain/valueObjects/ValueObject';
-import IEmailValidator from '../../../../../frameworks/validators/IEmailValidator';
+import { ValueObject } from '../../../../../abstractions/domain/valueObjects';
+import { IEmailValidator } from '../../../../../frameworks/validators/EmailValidator';
 
 export type EmailProps = {
   email: string;

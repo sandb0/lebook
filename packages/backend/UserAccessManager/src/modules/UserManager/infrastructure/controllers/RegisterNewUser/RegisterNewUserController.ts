@@ -1,5 +1,7 @@
-import AbstractController from '../../../../../abstractions/infrastructure/controllers/AbstractController';
-import AbstractResponse from '../../../../../abstractions/infrastructure/controllers/AbstractResponse';
+import {
+  AbstractResponse,
+  AbstractController,
+} from '../../../../../abstractions/infrastructure/controllers';
 import RegisterNewUser, {
   RegisterNewUserProps,
 } from '../../../application/RegisterNewUser/RegisterNewUser';

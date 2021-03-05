@@ -1,6 +1,6 @@
 import AbstractResponse from './AbstractResponse';
 
-enum HTTPStatusCode {
+export enum HTTPStatusCode {
   Ok = 200,
   BadRequest = 400,
 }
@@ -10,13 +10,13 @@ export default abstract class AbstractController<T> {
 
   public abstract execute(requestObject: T): AbstractResponse;
 
-  public ok(): AbstractResponse {
+  protected ok(): AbstractResponse {
     return {
       statusCode: HTTPStatusCode.Ok,
     };
   }
 
-  public badRequest(): AbstractResponse {
+  protected badRequest(): AbstractResponse {
     return {
       statusCode: HTTPStatusCode.BadRequest,
       error: {
