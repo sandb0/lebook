@@ -16,10 +16,12 @@ describe('Module - UserManager', () => {
         password: '',
       };
 
+      const email = props.email;
+
       new RegisterNewUser(emailFactoryMock).execute(props);
 
       expect(emailFactoryMock.create).toBeCalledTimes(1);
-      expect(emailFactoryMock.create).toBeCalledWith({ email: props.email });
+      expect(emailFactoryMock.create).toBeCalledWith({ email });
     });
   });
 
