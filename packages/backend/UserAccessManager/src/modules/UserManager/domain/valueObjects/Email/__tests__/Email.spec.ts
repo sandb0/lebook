@@ -1,3 +1,4 @@
+import faker from 'faker';
 import EmailFactory from '../EmailFactory';
 import { IEmailValidator } from '../../../../../../libs/validators/EmailValidator';
 
@@ -36,6 +37,23 @@ describe('Module: UserManager', () => {
       expect(emailObject.error).toBe(
         `[email] "${email}" must be a valid email`
       );
+    });
+
+    it('should return an `email` with lower case characters and trimmed', () => {
+      const EmailValidatorMock = jest.fn<Partial<IEmailValidator>, []>();
+      const emailValidatorMock = new EmailValidatorMock() as IEmailValidator;
+      emailValidatorMock.isEmail = jest.fn().mockReturnValue(true);
+
+      const emailFactory = new EmailFactory({
+        emailValidator: emailValidatorMock,
+      });
+
+      const emailDestandardized = '   ' + faker.internet.email().toUpperCase();
+      const emailStandardized = emailDestandardized.trim().toLowerCase();
+
+      const emailObject = emailFactory.create({ email: emailDestandardized });
+
+      expect(emailObject.email).toBe(emailStandardized);
     });
   });
 });

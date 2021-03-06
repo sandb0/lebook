@@ -10,9 +10,13 @@ export default abstract class ValueObject {
   }
 
   protected checkValidationRule(validationRule: () => void): void {
-    if (!this.error) {
+    if (!this.hasValidationError()) {
       validationRule();
     }
+  }
+
+  protected hasValidationError(): boolean {
+    return !!this._error;
   }
 
   protected abstract validationRules(): void;
