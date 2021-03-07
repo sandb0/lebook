@@ -7,8 +7,6 @@ export enum HTTPStatusCode {
 }
 
 export default abstract class AbstractController<T> {
-  protected errorMessages: string[] = [];
-
   public abstract execute(requestObject: T): AbstractResponse;
 
   protected ok(): AbstractResponse {
@@ -17,11 +15,11 @@ export default abstract class AbstractController<T> {
     };
   }
 
-  protected badRequest(): AbstractResponse {
+  protected badRequest(errorMessages: string[]): AbstractResponse {
     return {
       statusCode: HTTPStatusCode.BadRequest,
       error: {
-        messages: this.errorMessages,
+        messages: errorMessages,
       },
     };
   }
@@ -29,9 +27,6 @@ export default abstract class AbstractController<T> {
   protected serverError(): AbstractResponse {
     return {
       statusCode: HTTPStatusCode.ServerError,
-      error: {
-        messages: this.errorMessages,
-      },
     };
   }
 }
