@@ -4,10 +4,6 @@ import AbstractResponse from '../AbstractResponse';
 type RequestObject = null;
 
 class ControllerMock extends AbstractController<RequestObject> {
-  public addErrorMessageSpy(errorMessage: string) {
-    this.errorMessages.push(errorMessage);
-  }
-
   public execute(): AbstractResponse {
     const response: AbstractResponse = {
       statusCode: HTTPStatusCode.Ok,
@@ -20,8 +16,8 @@ class ControllerMock extends AbstractController<RequestObject> {
     return this.ok();
   }
 
-  public badRequestSpy() {
-    return this.badRequest();
+  public badRequestSpy(errorMessages: string[]) {
+    return this.badRequest(errorMessages);
   }
 
   public serverErrorSpy() {
@@ -41,31 +37,26 @@ describe('Abstractions', () => {
       expect(SUT.okSpy()).toEqual(responseObject);
     });
 
-    it('should return the expected `responseObject` when `badResponse()` method is called', () => {
+    it('should return the expected `responseObject` when `badRequest()` method is called', () => {
       const SUT = new ControllerMock();
-      SUT.addErrorMessageSpy('Any Error 1');
-      SUT.addErrorMessageSpy('Any Error 2');
+
+      const errorMessages = ['Any Error 1', 'Any Error 2'];
 
       const responseObject = {
         statusCode: HTTPStatusCode.BadRequest,
         error: {
-          messages: ['Any Error 1', 'Any Error 2'],
+          messages: errorMessages,
         },
       };
 
-      expect(SUT.badRequestSpy()).toEqual(responseObject);
+      expect(SUT.badRequestSpy(errorMessages)).toEqual(responseObject);
     });
 
     it('should return the expected `responseObject` when `serverError()` method is called', () => {
       const SUT = new ControllerMock();
-      SUT.addErrorMessageSpy('Any Error 1');
-      SUT.addErrorMessageSpy('Any Error 2');
 
       const responseObject = {
         statusCode: HTTPStatusCode.ServerError,
-        error: {
-          messages: ['Any Error 1', 'Any Error 2'],
-        },
       };
 
       expect(SUT.serverErrorSpy()).toEqual(responseObject);
