@@ -1,4 +1,4 @@
-import { AbstractUseCase } from '../../../../abstractions/application';
+import { AbstractApplicationService } from '../../../../abstractions/application';
 import ValueObjectValidationRule from '../../../../abstractions/application/Rules/ValueObjectValidationRule';
 import { EmailFactory } from '../../domain/valueObjects/Email';
 
@@ -8,7 +8,7 @@ export type RegisterNewUserProps = {
   password: string;
 };
 
-export default class RegisterNewUser extends AbstractUseCase<RegisterNewUserProps> {
+export default class RegisterNewUserService extends AbstractApplicationService<RegisterNewUserProps> {
   private emailFactory: EmailFactory;
 
   public constructor(emailFactory: EmailFactory) {
@@ -22,6 +22,6 @@ export default class RegisterNewUser extends AbstractUseCase<RegisterNewUserProp
 
     this.checkRule(new ValueObjectValidationRule([emailObject]));
 
-    return 'UseCase';
+    return 'Application Service: Success!';
   }
 }

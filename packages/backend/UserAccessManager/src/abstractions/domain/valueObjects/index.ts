@@ -1,2 +1,4 @@
-export { default as ValueObject } from './ValueObject';
-export { default as ValueObjectFactory } from './ValueObjectFactory';
+import ValueObject from './ValueObject';
+import ValueObjectFactory from './ValueObjectFactory';
+
+export { ValueObject, ValueObjectFactory };

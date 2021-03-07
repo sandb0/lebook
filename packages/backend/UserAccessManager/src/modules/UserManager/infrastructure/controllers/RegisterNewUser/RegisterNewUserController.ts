@@ -3,9 +3,9 @@ import {
   AbstractController,
 } from '../../../../../abstractions/infrastructure/controllers';
 import ValueObjectValidationError from '../../../../../abstractions/application/Errors/ValueObjectValidationError';
-import RegisterNewUser, {
+import RegisterNewUserService, {
   RegisterNewUserProps,
-} from '../../../application/RegisterNewUser/RegisterNewUserUseCase';
+} from '../../../application/RegisterNewUserService/RegisterNewUserService';
 
 type RegisterNewUserRequestObject = {
   fullName?: string;
@@ -14,12 +14,12 @@ type RegisterNewUserRequestObject = {
 };
 
 export default class RegisterNewUserController extends AbstractController<RegisterNewUserRequestObject> {
-  private useCase: RegisterNewUser;
+  private applicationService: RegisterNewUserService;
 
-  public constructor(useCase: RegisterNewUser) {
+  public constructor(applicationService: RegisterNewUserService) {
     super();
 
-    this.useCase = useCase;
+    this.applicationService = applicationService;
   }
 
   public execute(
@@ -32,7 +32,7 @@ export default class RegisterNewUserController extends AbstractController<Regist
     };
 
     try {
-      this.useCase.execute(props);
+      this.applicationService.execute(props);
 
       return this.ok();
     } catch (error) {

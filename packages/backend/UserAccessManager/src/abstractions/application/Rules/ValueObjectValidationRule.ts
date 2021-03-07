@@ -16,15 +16,18 @@ export default class ValueObjectValidationRule extends AbstractRule {
   }
 
   public getError(): ValueObjectValidationError {
+    const errorMessagesToString = this.getErrorMessagesToString();
+
+    return new ValueObjectValidationError(errorMessagesToString);
+  }
+
+  private getErrorMessagesToString() {
     const errorMessages: string[] = [];
-    let errorMessagesToString = '';
 
     this.valueObjects.forEach((valueObject) => {
       errorMessages.push(valueObject.error);
     });
 
-    errorMessagesToString = errorMessages.join(',');
-
-    return new ValueObjectValidationError(errorMessagesToString);
+    return errorMessages.join(',');
   }
 }

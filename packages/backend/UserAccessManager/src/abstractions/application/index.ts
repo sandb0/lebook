@@ -1,2 +1,4 @@
-export { default as AbstractUseCase } from './AbstractUseCase';
-export { default as AbstractRule } from './AbstractRule';
+import AbstractApplicationService from './AbstractApplicationService';
+import AbstractRule from './AbstractRule';
+
+export { AbstractApplicationService, AbstractRule };

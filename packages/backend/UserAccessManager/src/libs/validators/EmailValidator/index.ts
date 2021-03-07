@@ -1,1 +1,3 @@
-export { default as IEmailValidator } from './IEmailValidator';
+import IEmailValidator from './IEmailValidator';
+
+export { IEmailValidator };
