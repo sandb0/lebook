@@ -1,11 +1,11 @@
-import ValueObjectValidationError from '../../../../../abstractions/application/ValueObjectValidationError';
 import {
   AbstractResponse,
   AbstractController,
 } from '../../../../../abstractions/infrastructure/controllers';
+import ValueObjectValidationError from '../../../../../abstractions/application/Errors/ValueObjectValidationError';
 import RegisterNewUser, {
   RegisterNewUserProps,
-} from '../../../application/RegisterNewUser/RegisterNewUser';
+} from '../../../application/RegisterNewUser/RegisterNewUserUseCase';
 
 type RegisterNewUserRequestObject = {
   fullName?: string;
