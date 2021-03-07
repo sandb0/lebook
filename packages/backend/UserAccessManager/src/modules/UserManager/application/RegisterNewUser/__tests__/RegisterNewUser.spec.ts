@@ -1,5 +1,7 @@
+import faker from 'faker';
 import RegisterNewUser, { RegisterNewUserProps } from '../RegisterNewUser';
 import { EmailFactory } from '../../../domain/valueObjects/Email';
+import ValueObjectValidationError from '../../../../../abstractions/application/ValueObjectValidationError';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUser', () => {
@@ -12,7 +14,7 @@ describe('Module - UserManager', () => {
 
       const props: RegisterNewUserProps = {
         fullName: '',
-        email: '',
+        email: faker.internet.email(),
         password: '',
       };
 
@@ -34,12 +36,14 @@ describe('Module - UserManager', () => {
 
     const props: RegisterNewUserProps = {
       fullName: '',
-      email: '',
+      email: faker.internet.email(),
       password: '',
     };
 
-    const response = new RegisterNewUser(emailFactoryMock).execute(props);
-
-    expect(response).toBe('[email] cannot be empty');
+    try {
+      new RegisterNewUser(emailFactoryMock).execute(props);
+    } catch (error) {
+      expect(error).toBeInstanceOf(ValueObjectValidationError);
+    }
   });
 });

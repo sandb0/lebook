@@ -1,6 +1,10 @@
 import RegisterNewUserController from '../RegisterNewUserController';
 import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUser';
-import { AbstractResponse } from '../../../../../../abstractions/infrastructure/controllers';
+import {
+  AbstractResponse,
+  HTTPStatusCode,
+} from '../../../../../../abstractions/infrastructure/controllers';
+import ValueObjectValidationError from '../../../../../../abstractions/application/ValueObjectValidationError';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {
@@ -23,7 +27,34 @@ describe('Module - UserManager', () => {
       expect(registerNewUserMock.execute).toBeCalledWith(requestObject);
     });
 
-    it('should return an HTTP Status Code 500 (Server Error) if catch an error from Use Case', () => {
+    it('should return an HTTP Status Code 400 (Bad Request) if catch an `ValueObjectValidationError` error from the Use Case', () => {
+      const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
+      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
+
+      const validationErrors = ['Validation Error 1', 'Validation Error 2'];
+
+      registerNewUserMock.execute = jest.fn().mockImplementation(() => {
+        throw new ValueObjectValidationError(validationErrors.join(','));
+      });
+
+      const SUT = new RegisterNewUserController(registerNewUserMock);
+
+      const requestObject = {
+        fullName: undefined || '',
+        email: undefined || '',
+        password: undefined || '',
+      };
+
+      let responseObject: AbstractResponse = {
+        statusCode: 0,
+      };
+
+      responseObject = SUT.execute(requestObject);
+      expect(responseObject.statusCode).toBe(HTTPStatusCode.BadRequest);
+      expect(responseObject.error?.messages).toEqual(validationErrors);
+    });
+
+    it('should return an HTTP Status Code 500 (Server Error) if catch an `Error` error from the Use Case', () => {
       const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
       const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
       registerNewUserMock.execute = jest.fn().mockImplementation(() => {
@@ -42,11 +73,8 @@ describe('Module - UserManager', () => {
         statusCode: 0,
       };
 
-      try {
-        responseObject = SUT.execute(requestObject);
-      } catch (error) {
-        expect(responseObject.statusCode).toBe(500);
-      }
+      responseObject = SUT.execute(requestObject);
+      expect(responseObject.statusCode).toBe(HTTPStatusCode.ServerError);
     });
   });
 });
