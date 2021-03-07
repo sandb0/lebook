@@ -1,10 +1,10 @@
-import RegisterNewUserController from '../RegisterNewUserController';
-import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUser';
 import {
   AbstractResponse,
   HTTPStatusCode,
 } from '../../../../../../abstractions/infrastructure/controllers';
-import ValueObjectValidationError from '../../../../../../abstractions/application/ValueObjectValidationError';
+import ValueObjectValidationError from '../../../../../../abstractions/application/Errors/ValueObjectValidationError';
+import RegisterNewUserController from '../RegisterNewUserController';
+import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUserUseCase';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {

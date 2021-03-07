@@ -1,7 +1,9 @@
 import faker from 'faker';
-import RegisterNewUser, { RegisterNewUserProps } from '../RegisterNewUser';
+import RegisterNewUser, {
+  RegisterNewUserProps,
+} from '../RegisterNewUserUseCase';
 import { EmailFactory } from '../../../domain/valueObjects/Email';
-import ValueObjectValidationError from '../../../../../abstractions/application/ValueObjectValidationError';
+import ValueObjectValidationError from '../../../../../abstractions/application/Errors/ValueObjectValidationError';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUser', () => {
@@ -31,7 +33,7 @@ describe('Module - UserManager', () => {
     const EmailFactoryMock = jest.fn<Partial<EmailFactory>, []>();
     const emailFactoryMock = new EmailFactoryMock() as EmailFactory;
     emailFactoryMock.create = jest.fn().mockReturnValue({
-      error: '[email] cannot be empty',
+      error: 'Any Error',
     });
 
     const props: RegisterNewUserProps = {
@@ -45,5 +47,7 @@ describe('Module - UserManager', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(ValueObjectValidationError);
     }
+
+    expect.hasAssertions();
   });
 });
