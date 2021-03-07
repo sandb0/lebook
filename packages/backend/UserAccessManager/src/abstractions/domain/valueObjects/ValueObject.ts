@@ -9,6 +9,20 @@ export default abstract class ValueObject {
     this._error = errorMessage;
   }
 
+  public static getValueObjectsWithError(
+    valueObjects: ValueObject[]
+  ): ValueObject[] {
+    const valueObjectsWithError: ValueObject[] = [];
+
+    valueObjects.forEach((valueObject) => {
+      if (valueObject.error) {
+        valueObjectsWithError.push(valueObject);
+      }
+    });
+
+    return valueObjectsWithError;
+  }
+
   protected checkValidationRule(validationRule: () => void): void {
     if (!this.hasValidationError()) {
       validationRule();

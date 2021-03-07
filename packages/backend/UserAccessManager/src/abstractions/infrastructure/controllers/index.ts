@@ -1,2 +1,4 @@
-export { default as AbstractController } from './AbstractController';
-export { default as AbstractResponse } from './AbstractResponse';
+import AbstractController, { HTTPStatusCode } from './AbstractController';
+import AbstractResponse from './AbstractResponse';
+
+export { AbstractController, HTTPStatusCode, AbstractResponse };

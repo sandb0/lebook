@@ -1,3 +1,4 @@
+import ValueObjectValidationError from '../../../../../abstractions/application/ValueObjectValidationError';
 import {
   AbstractResponse,
   AbstractController,
@@ -32,10 +33,15 @@ export default class RegisterNewUserController extends AbstractController<Regist
 
     try {
       this.useCase.execute(props);
+
+      return this.ok();
     } catch (error) {
+      if (error instanceof ValueObjectValidationError) {
+        const errorMessages = error.message.split(',');
+        return this.badRequest(errorMessages);
+      }
+
       return this.serverError();
     }
-
-    return this.ok();
   }
 }

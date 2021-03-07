@@ -1,3 +1,5 @@
+import { AbstractUseCase } from '../../../../abstractions/application';
+import ValueObjectValidationRule from '../../../../abstractions/application/Rules/ValueObjectValidationRule';
 import { EmailFactory } from '../../domain/valueObjects/Email';
 
 export type RegisterNewUserProps = {
@@ -6,19 +8,19 @@ export type RegisterNewUserProps = {
   password: string;
 };
 
-export default class RegisterNewUser {
+export default class RegisterNewUser extends AbstractUseCase<RegisterNewUserProps> {
   private emailFactory: EmailFactory;
 
   public constructor(emailFactory: EmailFactory) {
+    super();
+
     this.emailFactory = emailFactory;
   }
 
   public execute(props: RegisterNewUserProps): string {
     const emailObject = this.emailFactory.create({ email: props.email });
 
-    if (emailObject.error) {
-      return emailObject.error;
-    }
+    this.checkRule(new ValueObjectValidationRule([emailObject]));
 
     return 'UseCase';
   }
