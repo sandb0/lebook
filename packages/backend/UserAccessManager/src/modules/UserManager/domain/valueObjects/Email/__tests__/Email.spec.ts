@@ -19,7 +19,7 @@ describe('Module: UserManager', () => {
       expect(emailObject.error).toBe('[email] cannot be empty');
     });
 
-    it('should return an error message if `email` is invalid', () => {
+    it('should set an error message if `email` is invalid', () => {
       const EmailValidatorMock = jest.fn<Partial<IEmailValidator>, []>();
       const emailValidatorMock = new EmailValidatorMock() as IEmailValidator;
       emailValidatorMock.isEmail = jest.fn().mockReturnValue(false);

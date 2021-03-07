@@ -4,13 +4,16 @@ import {
 } from '../../../../../../abstractions/infrastructure/controllers';
 import ValueObjectValidationError from '../../../../../../abstractions/application/Errors/ValueObjectValidationError';
 import RegisterNewUserController from '../RegisterNewUserController';
-import RegisterNewUser from '../../../../application/RegisterNewUser/RegisterNewUserUseCase';
+import RegisterNewUserService from '../../../../application/RegisterNewUserService/RegisterNewUserService';
 
 describe('Module - UserManager', () => {
   describe('RegisterNewUserController', () => {
-    it('should call RegisterNewUser Use Case with expected `requestObject`', () => {
-      const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
-      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
+    it('should call RegisterNewUserService with expected `requestObject`', () => {
+      const RegisterNewUserMock = jest.fn<
+        Partial<RegisterNewUserService>,
+        []
+      >();
+      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUserService;
       registerNewUserMock.execute = jest.fn();
 
       const SUT = new RegisterNewUserController(registerNewUserMock);
@@ -27,9 +30,12 @@ describe('Module - UserManager', () => {
       expect(registerNewUserMock.execute).toBeCalledWith(requestObject);
     });
 
-    it('should return an HTTP Status Code 400 (Bad Request) if catch an `ValueObjectValidationError` error from the Use Case', () => {
-      const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
-      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
+    it('should return an HTTP Status Code 400 (Bad Request) if catch an `ValueObjectValidationError` error from the ApplicationService', () => {
+      const RegisterNewUserMock = jest.fn<
+        Partial<RegisterNewUserService>,
+        []
+      >();
+      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUserService;
 
       const validationErrors = ['Validation Error 1', 'Validation Error 2'];
 
@@ -54,9 +60,12 @@ describe('Module - UserManager', () => {
       expect(responseObject.error?.messages).toEqual(validationErrors);
     });
 
-    it('should return an HTTP Status Code 500 (Server Error) if catch an `Error` error from the Use Case', () => {
-      const RegisterNewUserMock = jest.fn<Partial<RegisterNewUser>, []>();
-      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUser;
+    it('should return an HTTP Status Code 500 (Server Error) if catch an `Error` error from the ApplicationService', () => {
+      const RegisterNewUserMock = jest.fn<
+        Partial<RegisterNewUserService>,
+        []
+      >();
+      const registerNewUserMock = new RegisterNewUserMock() as RegisterNewUserService;
       registerNewUserMock.execute = jest.fn().mockImplementation(() => {
         throw new Error('Server Error');
       });
