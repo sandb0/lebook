@@ -28,6 +28,7 @@
   - `abstractions/`.
 
     - `domain/`.
+      - `valueObjects/`.
     - `application/`.
     - `infrastructure/`.
       - `controllers/`.
@@ -35,7 +36,12 @@
   - `modules/`.
     - `[ModuleName]/`.
       - `domain/`.
+        - `valueObjects/`.
+          - `[ValueObjectName]/`.
+            - `__tests__/`.
       - `application/`.
+        - `[ApplicationServiceName]/`.
+          - `__tests__/`.
       - `infrastructure/`.
         - `controllers/`.
           - `[ControllerName]/`.
