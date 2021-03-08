@@ -1,6 +1,6 @@
-import AbstractRule from '../AbstractRule';
-import { ValueObject } from '../../domain/valueObjects';
-import ValueObjectValidationError from '../Errors/ValueObjectValidationError';
+import AbstractRule from '../../AbstractRule';
+import { ValueObject } from '../../../domain/valueObjects';
+import ValueObjectValidationError from '../../Errors/ValueObjectValidationError';
 
 export default class ValueObjectValidationRule extends AbstractRule {
   private valueObjects: ValueObject[];

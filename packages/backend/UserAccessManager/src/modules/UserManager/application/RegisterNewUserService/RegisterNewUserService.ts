@@ -1,5 +1,5 @@
 import { AbstractApplicationService } from '../../../../abstractions/application';
-import ValueObjectValidationRule from '../../../../abstractions/application/Rules/ValueObjectValidationRule';
+import ValueObjectValidationRule from '../../../../abstractions/application/Rules/ValueObjectValidationRule/ValueObjectValidationRule';
 import { EmailFactory } from '../../domain/valueObjects/Email';
 
 export type RegisterNewUserProps = {
